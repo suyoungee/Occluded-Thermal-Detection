@@ -1,11 +1,18 @@
 # /requirements.txt
-torch             # if Error occured, install pytorch yourself according to your system and CUDA version!!!!
-torchvision
-torchaudio
-ultralytics
-pandas
-Pillow
-tqdm
+accelerate
+bitsandbytes
+diffusers
+numpy
 opencv-python
-tensorflow
+pandas
+pillow
+protobuf
+sentencepiece
 tensorboard
+tensorflow
+torch
+torchaudio
+torchvision
+tqdm
+transformers
+ultralytics
