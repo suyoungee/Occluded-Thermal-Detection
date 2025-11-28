@@ -18,10 +18,10 @@ def train_model():
     # 2. 학습 실행 (Fine-tuning)
     results = model.train(
         data=DATA_CONFIG,
-        epochs=40,           # 원하는 학습 횟수
+        epochs=80,           # 원하는 학습 횟수
         imgsz=640,            # 이미지 크기
         device=[0,1],
-        batch=32,             # 배치 사이즈 (GPU 메모리에 따라 조정)
+        batch=16,             # 배치 사이즈 (GPU 메모리에 따라 조정)
         #patience=100,         # Early stopping patience
         lr0=0.0001,              # 학습률
         project='runs/detect',# 학습 결과 저장 경로
