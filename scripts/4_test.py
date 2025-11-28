@@ -3,11 +3,12 @@
 import os
 from ultralytics import YOLO
 
-PROJECT_ROOT = os.path.join(os.path.dirname(__file__), '..')
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 DATA_CONFIG = os.path.join(PROJECT_ROOT, 'configs', 'roboflow_data.yaml')
 
 # 학습 결과가 저장된 weights 경로를 지정합니다.
-BEST_WEIGHTS = '/home/suyoung/study/IPIU-2026/runs/detect/train8/weights/best.pt'
+SELECT_WEIGHTS = 'train8'
+BEST_WEIGHTS = os.path.join(PROJECT_ROOT, 'runs', 'detect', SELECT_WEIGHTS, 'weights', 'best.pt')
 
 def test_model_quantitatively():
     """

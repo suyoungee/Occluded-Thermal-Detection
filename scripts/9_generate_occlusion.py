@@ -12,13 +12,15 @@ from diffusers import FluxFillPipeline, FluxTransformer2DModel
 from transformers import T5EncoderModel, BitsAndBytesConfig
 
 # -------------------- 설정 --------------------
-# 입력 이미지 경로 (/train/images/split_1,split_2, split_3) <- 8번 코드로 분할한 이미지 폴더 두 개
-# 수영: split_1 담당, 민중: split_2 담당 , 학연생 컴퓨터: split_3 담당
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+# 입력 이미지 경로 (/train/images/split_1,split_2, split_3) <- 8번 코드로 분할한 이미지 폴더
+# 수영: split_1 담당, 민중: split_2 담당 , 다른 컴퓨터: split_3 담당
 SPLIT_FOLDER = 'split_1'
-INPUT_DIR = os.path.join('/home/suyoung/study/IPIU-2026/data/RoboFlow_FLIR_Dataset_v27_yolo11/train/images', SPLIT_FOLDER)
+INPUT_DIR = os.path.join(PROJECT_ROOT, 'data', 'RoboFlow_FLIR_Dataset_v27_yolo11', 'train', 'images', SPLIT_FOLDER)
 
 # 생성한 이미지 저장 경로
-OUTPUT_DIR = os.path.join('/home/suyoung/study/IPIU-2026/data/FLUX1-Fill-dev', SPLIT_FOLDER)
+OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'data', 'FLUX1-Fill-dev', SPLIT_FOLDER)
 
 # NUM_IMAGES_TO_GENERATE = 2400
 NUM_IMAGES_TO_GENERATE = 800 # 2400장에서 800장으로 변경

@@ -7,12 +7,12 @@ import random
 from tqdm import tqdm  # 진행률 표시를 위해 추가 (없으면 pip install tqdm)
 
 # ----------------- 1. 설정 및 경로 정의 -----------------
-# 원본 데이터셋 루트 경로 (사용자 제공 경로)
-ORIGINAL_ROOT = '/home/suyoung/study/IPIU2026/data/RoboFlow_FLIR_Dataset_v27_yolo11'
-
 # 프로젝트의 타겟 데이터 경로 (프로젝트 루트 기준)
-PROJECT_ROOT = os.path.join(os.path.dirname(__file__), '..')
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 TARGET_DATA_ROOT = os.path.join(PROJECT_ROOT, 'data', 'RoboFlow_FLIR_Dataset_v27_yolo11')
+
+# 원본 데이터셋 루트 경로 (사용자 제공 경로)
+ORIGINAL_ROOT = os.path.join(PROJECT_ROOT, 'data', 'RoboFlow_FLIR_Dataset_v27_yolo11')
 
 # YOLO 타겟 폴더 구조
 TARGET_IMAGES = os.path.join(TARGET_DATA_ROOT, 'images')

@@ -6,8 +6,10 @@ import random
 from tqdm import tqdm
 
 # -------------------- 설정 --------------------
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
 # 원본 이미지 경로
-SOURCE_DIR = '/home/suyoung/study/IPIU-2026/data/RoboFlow_FLIR_Dataset_v27_yolo11/train/images'
+SOURCE_DIR = os.path.join(PROJECT_ROOT, 'data', 'RoboFlow_FLIR_Dataset_v27_yolo11', 'train', 'images')
 
 # 저장할 경로
 DEST_DIR_1 = os.path.join(SOURCE_DIR, 'split_1')
