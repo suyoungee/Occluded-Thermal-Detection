@@ -3,6 +3,5 @@ my_lab/
 runs/
 generate_diffusion/
 
-data/FLUX1_Fill_Dev_2400
 data/RoboFlow_FLIR_Dataset_v27_yolo11
 data/test
