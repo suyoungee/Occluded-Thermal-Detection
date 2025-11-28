@@ -1,4 +1,4 @@
-path: /home/suyoung/study/IPIU-2026/data/RoboFlow_FLIR_Dataset_v27_yolo11
+path: data/RoboFlow_FLIR_Dataset_v27_yolo11
 
 train: ../train/images
 val: ../valid/images
