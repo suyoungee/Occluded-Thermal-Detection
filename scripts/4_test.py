@@ -30,7 +30,6 @@ def test_model_quantitatively():
     print(f"모델 ({model_name}) 테스트셋 정량 평가 시작...")
     
     # 2. Run quantitative evaluation through Ultralytics model.val().
-    # The data configuration selects data/RoboFlow_FLIR_Dataset_v27_yolo11/test/images.
     metrics = model.val(
         data=DATA_CONFIG,
         imgsz=640,
