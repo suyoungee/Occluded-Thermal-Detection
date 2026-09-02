@@ -8,6 +8,7 @@ pandas
 pillow
 protobuf
 sentencepiece
+simple-lama-inpainting
 tensorboard
 tensorflow
 torch
