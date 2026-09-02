@@ -3,32 +3,29 @@
 import os
 from ultralytics import YOLO
 
-# 설정 파일 경로 정의
+# Define configuration paths.
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), '..')
 DATA_CONFIG = os.path.join(PROJECT_ROOT, 'configs', 'roboflow_data.yaml')
-MODEL_TYPE = 'yolo11m.pt' # YOLOv11m 사전 학습된 가중치 파일
+MODEL_TYPE = 'yolo11m.pt' # Pretrained YOLOv11m weights.
 
 def train_model():
-    # 1. YOLO 모델 로드 (사전 학습된 가중치 사용)
-    # .pt 파일이 없으면 자동으로 다운로드됩니다.
+    # 1. Load the YOLO model with pretrained weights.
+    # The weights are downloaded automatically when the .pt file is missing.
     model = YOLO(MODEL_TYPE) 
     
     print(f"YOLOv11 모델 ({MODEL_TYPE}) 학습 시작...")
     
-    # 2. 학습 실행 (Fine-tuning)
-    results = model.train(
+    # 2. Fine-tune the model.
+    model.train(
         data=DATA_CONFIG,
-        epochs=80,           # 원하는 학습 횟수
-        imgsz=640,            # 이미지 크기
+        epochs=80,           # Number of training epochs.
+        imgsz=640,            # Input image size.
         device=[0,1],
-        batch=16,             # 배치 사이즈 (GPU 메모리에 따라 조정)
-        #patience=100,         # Early stopping patience
-        lr0=0.0001,              # 학습률
-        project='runs/detect',# 학습 결과 저장 경로
-        name='train', # 결과 저장 폴더 이름
-        workers=8,            # 데이터 로딩을 위한 워커 수
-        # augmentation: BIRDSAI 데이터에 맞춰 Augmentation 설정 조정 가능 (예: hsv, flip 등)
-        # cache: True로 설정하여 데이터 로딩 속도 향상
+        batch=16,             # Adjust the batch size to available GPU memory.
+        lr0=0.0001,              # Initial learning rate.
+        project='runs/detect',# Directory for training outputs.
+        name='train', # Run directory name.
+        workers=8,            # Number of data-loading workers.
     )
     
     print("학습 완료.")

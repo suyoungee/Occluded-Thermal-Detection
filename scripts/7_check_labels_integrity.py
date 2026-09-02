@@ -1,7 +1,7 @@
 import os
 import glob
 
-# ----------------- 설정 -----------------
+# ---------------- Configuration ----------------
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), '..')
 DATA_ROOT = os.path.join(PROJECT_ROOT, 'data', 'RoboFlow_FLIR_Dataset_v27_yolo11')
 
@@ -15,45 +15,42 @@ def check_labels_integrity():
     
     label_sets = {}
     
-    # 1. 각 Split별 정합성(Pairing) 검사
+    # 1. Check image-label pairing for each split.
     for split in SPLITS:
         print(f"--- [ {split.upper()} Set 검사 ] ---")
         
         img_dir = os.path.join(IMAGES_ROOT, split)
         lbl_dir = os.path.join(LABELS_ROOT, split)
         
-        # 파일 목록 가져오기 (확장자 제거한 순수 파일명)
-        # jpg 외에 다른 이미지 포맷이 있다면 확장자 리스트 조정 필요
+        # Collect filenames without extensions.
+        # Extend this pattern when image formats other than JPG are used.
         img_files = {os.path.splitext(os.path.basename(f))[0] for f in glob.glob(os.path.join(img_dir, '*.jpg'))}
         lbl_files = {os.path.splitext(os.path.basename(f))[0] for f in glob.glob(os.path.join(lbl_dir, '*.txt'))}
         
-        label_sets[split] = lbl_files # 중복 검사를 위해 저장
-        
-        # A. Labels without Images (치명적 오류)
-        # 라벨은 있는데 이미지가 없는 경우 -> 학습 시 에러 발생
+        label_sets[split] = lbl_files # Retain labels for the overlap check.
+
+        # A. Labels without images are fatal during training.
         orphaned_labels = lbl_files - img_files
         if orphaned_labels:
             print(f"❌ [심각] 이미지가 없는 라벨(Orphaned Labels) 발견: {len(orphaned_labels)}개")
-            # 예시 3개만 출력
+            # Print at most three examples.
             print(f"   예시: {list(orphaned_labels)[:3]} ...")
         else:
             print("✅ 모든 라벨 파일에 대응하는 이미지가 존재합니다.")
 
-        # B. Images without Labels (경고/참고)
-        # 이미지는 있는데 라벨이 없는 경우 -> YOLO는 이를 '배경(Background)' 이미지로 간주함.
-        # 하지만 1_convert_data.py 로직상 객체가 있는 이미지만 복사했으므로, 
-        # 여기서 차이가 나면 변환 과정이나 파일 복사 과정의 문제일 수 있음.
+        # B. YOLO treats images without labels as background images.
+        # Because 1_convert_data.py copies only images containing objects, a
+        # mismatch here may indicate a conversion or file-copying issue.
         orphaned_images = img_files - lbl_files
         if orphaned_images:
             print(f"⚠️ [주의] 라벨이 없는 이미지(Background Images?) 발견: {len(orphaned_images)}개")
-            # print(f"   (의도한 배경 이미지가 아니라면 1_convert_data.py를 확인하세요.)")
         else:
             print("✅ 모든 이미지 파일에 대응하는 라벨이 존재합니다.")
             
         print(f"   -> 라벨 파일 수: {len(lbl_files):,}개 / 이미지 파일 수: {len(img_files):,}개")
         print("")
 
-    # 2. Labels 간 중복(Leakage) 검사
+    # 2. Check label overlap between splits.
     print("--- [ Labels 중복(Data Leakage) 검사 ] ---")
     overlap_found = False
     
