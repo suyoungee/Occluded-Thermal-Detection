@@ -12,8 +12,8 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 TARGET_DATA_ROOT = os.path.join(PROJECT_ROOT, 'data', 'RoboFlow_FLIR_Dataset_v27_yolo11')
 
 # Root directory of the source dataset.
+# By default this matches TARGET_DATA_ROOT; change it when converting from a different raw dataset layout.
 ORIGINAL_ROOT = os.path.join(PROJECT_ROOT, 'data', 'RoboFlow_FLIR_Dataset_v27_yolo11')
-
 # YOLO destination directories.
 TARGET_IMAGES = os.path.join(TARGET_DATA_ROOT, 'images')
 TARGET_LABELS = os.path.join(TARGET_DATA_ROOT, 'labels')
