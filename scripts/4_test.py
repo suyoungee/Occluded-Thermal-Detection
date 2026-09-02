@@ -13,7 +13,7 @@ BEST_WEIGHTS = os.path.join(PROJECT_ROOT, 'runs', 'detect', SELECT_WEIGHTS, 'wei
 def test_model_quantitatively():
     """
     Run quantitative evaluation on the test dataset
-    (data/BIRDSAI/images/test).
+    defined by configs/roboflow_data.yaml (split='test').
     """
     # 1. Load the trained model.
     if not os.path.exists(BEST_WEIGHTS):
@@ -30,7 +30,7 @@ def test_model_quantitatively():
     print(f"모델 ({model_name}) 테스트셋 정량 평가 시작...")
     
     # 2. Run quantitative evaluation through Ultralytics model.val().
-    # The data configuration selects data/BIRDSAI/images/test.
+    # The data configuration selects data/RoboFlow_FLIR_Dataset_v27_yolo11/test/images.
     metrics = model.val(
         data=DATA_CONFIG,
         imgsz=640,
