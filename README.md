@@ -186,19 +186,6 @@ place input images in `assets/`:
 python scripts/5_predict.py
 ```
 
-## Citation
-
-```bibtex
-@inproceedings{gong2026occludedthermal,
-  title     = {Data Augmentation for Improving Thermal Image Detection
-               under Partial Occlusion},
-  author    = {Gong, Minjoong and Cho, Suyoung and Park, Jinsun},
-  booktitle = {Proceedings of the 38th Workshop on Image Processing
-               and Image Understanding (IPIU)},
-  year      = {2026}
-}
-```
-
 ## Acknowledgements
 
 This project uses [Ultralytics YOLO](https://github.com/ultralytics/ultralytics),
